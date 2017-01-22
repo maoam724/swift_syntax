@@ -9,116 +9,97 @@ var str = "Hello, playground"
 
 
 
-let theColor = "gray"
-switch theColor {
-    case "red","yellow":
-       print("赤と黄色は注意")
-    case "green":
-       print("緑は快適")
-    case "gray":
-       print("グレーは停止中")
-    default:
-    print("その他は順調")
+func dice() -> Int {
+    let number = 1 + arc4random_uniform(6)
+    return Int(number)
 }
-print(theColor)
+
+for _ in 1...6 {
+    let num = dice()
+    print(num)
+}
 
 
-//　２０回繰り返す
-for _ in 1...20 {
-    let num = arc4random_uniform(50)
-    print("\(num)", terminator: "")
-    
-    //　numで振り分ける
-    switch num {
-    case (10...15):
-        print(":交換 ", terminator: "")
-    case 20,(31...35),40:
-        print(":再検査 ", terminator: "")
-    default:
-        print(":合格 ", terminator: "")
+//
+
+
+func twice(num:Double) -> Double {
+    return num * 2
+}
+
+
+//
+
+
+func plus(a:Double,b:Double) -> Double {
+    return a + b
+}
+
+let ans = plus(6, b:5)
+print(ans)
+
+
+//
+
+func sum(numbers:Double...) -> Double {
+    var total:Double = 0.0
+    for num in numbers {
+        total += num
+    }
+    return total
+}
+
+let goukei = sum(5,6,7,8,9)
+print(goukei)
+
+
+//
+
+func greeting(who:String = "お客様") -> String {
+    return who + "、こんにちは"
+}
+
+let greeting1 = greeting("田中様")
+print(greeting1)
+
+let greeting2 = greeting()
+print(greeting2)
+
+
+//
+
+func calc(a:Int, b:Int=1, c:Int=1) -> Int {
+    return a + b*10 + c*100
+}
+
+let ans1 = calc(0)
+let ans2 = calc(0, b:4)
+let ans3 = calc(0, c:3)
+let ans4 = calc(5, b:4, c:3)
+
+print("ans1 = \(ans1)")
+print("ans2 = \(ans2)")
+print("ans3 = \(ans3)")
+print("ans4 = \(ans4)")
+
+
+//
+
+class ViewController: UIViewController {
+    func testResult(kokugo:Int, sugaku:Int, eigo:Int) -> (total:Int, average:Double) {
+        //３科目合計
+        let total = kokugo + sugaku + eigo
+        //３科目平均
+        var ave = Double(total)/3
+        //小数点以下１位で四捨五入
+        ave = round(ave*10)/10
+        return (total, ave)
     }
 }
 
-
-//
-
-let size = (45, 70, 80)
-switch size {
-   case let (width, height, _) where (width>=60)||(height>=60):
-       print("規定外：幅高さのどちらかが60以上")
-   case let (_, _, weight) where (weight>=80):
-       print("規定外：重さ80以上")
-default:
-    print("規定サイズ内")
-}
-
-
-//
-
-let aPoint = (50, 0)
-switch aPoint {
-   case (0, 0):
-       print("中心点です")
-   case (0, _):
-       print("x軸の点です")
-   case (_, 0):
-       print("y軸の点です")
-   case let(x, y):
-    print("点(\(x),\(y))です")
-}
-
-
-//
-
-var abc:(a:Bool, b:Bool, c:Bool) = (false, false, false)
-//bの場合を試します
-let fall = "b"
-switch fall {
-    case "a":
-        abc.a = true
-        fallthrough
-    case "b":
-        abc.b = true
-        fallthrough
-    case "c":
-        abc.c = true
-        fallthrough
-default:
-    print(abc)
-}
-
-
-
-for i in 0...2 {
-    for j in 0...2 {
-        let point = (5*i, 10*j)
-        print("\(i)-\(j)回目 \(point)")
-    }
-}
-
-
-let numList = [3,2,6,5,8,7,9]
-var sum = 50
-for num in numList {
-    sum -= num
-}
-print("合計 \(sum)")
-
-
-
-let tokyometro = ["a":"銀座線", "M":"丸ノ内線", "H":"日比谷線", "T":"東西線", "C":"千代田線", "Z":"半蔵門線", "N":"南北線", "F":"副都心線"]
-for (rosenKigou,rosenName) in tokyometro {
-    print("\(rosenName)は\(rosenKigou)")
-}
-
-
-let kotoba = "アイウエオ"
-for masse in kotoba.characters {
-    print(masse)
-}
-
-
-
+let result = testResult(80, sugaku: 68, eigo: 72)
+print("合計 \(result.total)")
+print("平均 \(result.average)")
 
 
 
